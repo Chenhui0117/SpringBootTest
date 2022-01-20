@@ -1,0 +1,5 @@
+org\jxau\hui\HuiApplication.class
+org\jxau\hui\entity\User.class
+org\jxau\hui\controller\HelloController.class
+org\jxau\hui\mapper\UserMapper.class
+org\jxau\hui\service\UserService.class

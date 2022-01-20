@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jxau.hui.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="org.jxau.hui.entity.User">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+        <result column="notes" jdbcType="VARCHAR" property="notes" />
+    </resultMap>
+    <!--查询用户信息-->
+    <select id="getUserInfo" resultType="org.jxau.hui.entity.User" parameterType="int">
+        select * from user where id = #{id}
+    </select>
+    <!--删除用户信息-->
+    <delete id="deleteById" parameterType="int">
+        delete from user where id=#{id}
+    </delete>
+    <!--返回所有用户信息-->
+    <select id="selectAll"  resultType="org.jxau.hui.entity.User">
+        select * from user
+    </select>
+
+    <!--增加用户信息-->
+    <insert id="save" parameterType="org.jxau.hui.entity.User" >
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="pwd != null" >
+                pwd,
+            </if>
+
+            <if test="notes != null" >
+                notes,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null" >
+                #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="notes != null" >
+                #{notes,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!--根据id更改用户信息-->
+    <update id="update" parameterType="org.jxau.hui.entity.User">
+        update user
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null" >
+                pwd = #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="notes != null" >
+                notes = #{notes,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
